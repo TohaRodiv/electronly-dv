@@ -1,8 +1,8 @@
-import { StorageRepositoryInterface } from "../../StorageRepositoryInterface";
+import { IProductRepository } from "../../interfaces/IProductRepository";
 import { TFindManyOptions } from "../../types";
 import { BaseRepository } from "../BaseRepository";
 
-export class ProductRepository extends BaseRepository implements StorageRepositoryInterface {
+export class ProductRepository extends BaseRepository implements IProductRepository {
 	public async findMany(options: TFindManyOptions): Promise<any> {
 		const { limit, } = options;
 		

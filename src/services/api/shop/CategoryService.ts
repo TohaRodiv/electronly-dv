@@ -1,8 +1,9 @@
+import { IStorageRepository } from "#repositories/interfaces/IStorageRepository";
 import { CategoryRepository } from "#repositories/local/shop/CategoryRepository";
 
 
 export const CategoryService = new class {
-	protected repository: CategoryRepository;
+	protected repository: IStorageRepository;
 
 	constructor() {
 		this.repository = new CategoryRepository();

@@ -1,8 +1,8 @@
-import { StorageRepositoryInterface } from "../../StorageRepositoryInterface";
+import { IStorageRepository } from "../../interfaces/IStorageRepository";
 import { TFindManyOptions } from "../../types";
 import { news } from "#data/news";
 
-export class NewsRepository implements StorageRepositoryInterface {
+export class NewsRepository implements IStorageRepository {
 	findMany(_options: TFindManyOptions): Promise<any[]> {
 		return new Promise((resolve) => {
 			resolve(news);

@@ -1,6 +1,6 @@
-import { TFindManyOptions } from "./types";
+import { TFindManyOptions } from "../types";
 
-export interface StorageRepositoryInterface {
+export interface IStorageRepository {
 	findMany(options: TFindManyOptions): Promise<any[]>;
 	findById(id: number): Promise<any>;
 }

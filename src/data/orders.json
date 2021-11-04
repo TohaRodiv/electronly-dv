@@ -1,1 +1,10 @@
-[{"id":1,"fio":"Иван","tel":"8 (999) 792-87-16","email":"ivan-123-zku@gmail.com","comment":"Хочу заказать этот айфон срочно!"},{"id":2,"fio":"Егор","tel":"8 (999) 792-87-10","email":"yaga@gmail.com","comment":"Хочу заказать этот айфон срочно!"},{"id":3,"fio":"Егор","tel":"8 (999) 792-87-10","email":"yaga@gmail.com","comment":"Хочу заказать этот айфон срочно!","productId":"5","status":"new"},{"id":4,"fio":"Егор","tel":"8 (999) 792-87-10","email":"yaga@gmail.com","comment":"Хочу заказать этот айфон срочно!","productId":"5","status":"new"},{"id":5,"fio":"Алексей","tel":"8 (999) 792-87-11","email":"alex.rum@yandex.ru","comment":"Хочу заказать","productId":"5","status":"new"},{"id":6,"fio":"Володя","tel":"8 (999) 792-87-11","email":"novuspartsdv@gmail.com","comment":"","productName":"Apple iPhone 11 черный","productId":"5","status":"new"}]
+[
+  {
+    "id": 1,
+    "fio": "Иван Михайлович",
+    "tel": "8 (999) 999-99-99",
+    "email": "test@gmail.com",
+    "comment": "Тестовый заказ",
+	"status": "test"
+  }
+]

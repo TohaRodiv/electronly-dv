@@ -1,8 +1,9 @@
+import { IOrderRepository } from "#repositories/interfaces/IOrderRepository";
 import { OrderRepository } from "#repositories/local/shop/OrderRepository";
 import { createOrderDto } from "./dto/createOrderDto";
 
 export const OrderService = new class {
-	protected repsitory: OrderRepository;
+	protected repsitory: IOrderRepository;
 	
 	constructor() {
 		this.repsitory = new OrderRepository();

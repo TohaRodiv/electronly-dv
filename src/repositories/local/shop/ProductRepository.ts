@@ -1,8 +1,8 @@
-import { StorageRepositoryInterface } from "../../StorageRepositoryInterface";
 import { TFindManyOptions } from "../../types";
 import { products } from "#data/products";
+import { IProductRepository } from "../../interfaces/IProductRepository";
 
-export class ProductRepository implements StorageRepositoryInterface {
+export class ProductRepository implements IProductRepository {
 	findMany(_options: TFindManyOptions): Promise<any[]> {
 		return new Promise ((resolve) => {
 			resolve(products);

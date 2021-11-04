@@ -1,11 +1,11 @@
-import { StorageRepositoryInterface } from "../../StorageRepositoryInterface";
+import { IStorageRepository } from "../../interfaces/IStorageRepository";
 import { TFindManyOptions } from "../../types";
 import { categories } from "#data/categories";
 
 /**
  * TODO: Доработать для работы с деревом категорий
  */
-export class CategoryRepository implements StorageRepositoryInterface {
+export class CategoryRepository implements IStorageRepository {
 	findMany(_options: TFindManyOptions): Promise<any[]> {
 		return new Promise((resolve) => {
 			resolve(categories);

@@ -1,7 +1,8 @@
+import { IStorageRepository } from "#repositories/interfaces/IStorageRepository";
 import { BannerRepository } from "#repositories/local/promo/BannerRepository";
 
 export const BannerService = new class {
-	protected repsitory: BannerRepository;
+	protected repsitory: IStorageRepository;
 
 	constructor() {
 		this.repsitory = new BannerRepository();	

@@ -1,7 +1,8 @@
+import { IProductRepository } from "#repositories/interfaces/IProductRepository";
 import { ProductRepository } from "#repositories/local/shop/ProductRepository";
 
 export const ProductService = new class {
-	protected repository: ProductRepository;
+	protected repository: IProductRepository;
 
 	constructor () {
 		this.repository = new ProductRepository();

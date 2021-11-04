@@ -1,0 +1,53 @@
+.admin-orders {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 1rem;
+
+	&__item > .admin-order {
+		height: 100%;
+	}
+}
+
+.admin-order {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid color("gray");
+	padding: .5rem;
+	@include transition("default");
+
+	&:hover {
+		border-color: color("dark");
+		@include transition("default");
+	}
+
+	&__header {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	&__name {
+		margin: 0;
+		padding: 0;
+		font-size: 1.5rem;
+		font-weight: 600;
+	}
+
+	&__status {
+		padding: .2rem .5rem;
+		border: 1px solid color("gray");
+		color: color("dark");
+		font-variant: all-small-caps;
+	}
+
+	&__comment {}
+
+	&__date {
+		font-size: .9rem;
+		font-style: italic;
+		color: #555;
+	}
+}
+
+.admin-order-contact {}

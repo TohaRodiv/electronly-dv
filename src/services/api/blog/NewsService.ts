@@ -1,7 +1,8 @@
+import { IStorageRepository } from "#repositories/interfaces/IStorageRepository";
 import { NewsRepository } from "#repositories/local/blog/NewsRepository";
 
 export const NewsService = new class {
-	protected repository: NewsRepository;
+	protected repository: IStorageRepository;
 
 	constructor () {
 		this.repository = new NewsRepository();
