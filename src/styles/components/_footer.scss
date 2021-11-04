@@ -1,0 +1,50 @@
+.footer {
+	color: color("light");
+	background-color: color("dark");
+
+	&__container {
+		padding: 1rem 0;
+	}
+
+	&__row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+	}
+
+	&__col {}
+
+	&__copyright {
+		padding: 1rem 0 1rem 0;
+		background-color: #1F1F1F;
+		text-align: center;
+	}
+}
+
+.footer-menu {
+	flex-direction: column;
+
+	&__item {
+		
+	}
+
+	&__link {
+		color: color("light");
+		padding: .2em;
+		display: inline-flex;
+		align-items: center;
+
+		&::before {
+			content: "»";
+			display: inline-block;
+			position: relative;
+			margin-right: .4em;
+			font-size: 1em;
+		}
+
+		@include transition("default");
+		@include hover-focus {
+			color: color("accent");
+		}
+	}
+}

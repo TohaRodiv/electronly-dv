@@ -1,0 +1,16 @@
+.logo {
+	display: flex;
+	align-items: center;
+	font-size: 1rem;
+
+	&__link {
+		display: inline-block;
+		text-decoration: none;
+		font-size: 1.3rem;
+		color: color("light");
+		@include transition("default");
+		@include hover-focus {
+			color: color("accent");
+		}
+	}
+}

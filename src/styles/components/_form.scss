@@ -1,0 +1,36 @@
+.form {
+	font-size: 1rem;
+
+	&__head {
+		margin-bottom: 1em;
+	}
+
+	&__row {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+	}
+
+	&__col {}
+
+	&__col + &__col {
+		margin-top: .5em;
+	}
+
+	&__label {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: .5em;
+	}
+
+	&__name {
+		flex: 1 100%;
+		max-width: 200px;
+	}
+
+	&__field {
+		flex: 1;
+		max-width: 500px;
+	}
+}

@@ -1,0 +1,23 @@
+.main-menu {
+	display: flex;
+	align-items: center;
+
+	@media (max-width: 500px) {
+		flex-wrap: wrap;
+	}
+
+	&__item {}
+
+	&__link {
+		display: inline-block;
+		text-decoration: none;
+		padding: 0.5em 1em;
+		color: color("light");
+		@include transition("default");
+
+		@include hover-focus() {
+			background-color:color("light");
+			color: color("dark");
+		}
+	}
+}

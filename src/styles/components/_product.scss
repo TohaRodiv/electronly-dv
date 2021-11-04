@@ -1,0 +1,26 @@
+.product {
+	
+	&__container {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	&__image {}
+
+	&__body {}
+
+	&__head {}
+
+	&__description {}
+
+	&__price {}
+
+	&__btn-group {
+		margin: 1em 0;
+	}
+
+	&__btn {
+		@include button ();
+		&-order {}
+	}
+}

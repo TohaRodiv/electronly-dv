@@ -1,0 +1,57 @@
+.top-header {
+	background-color: #000;
+	box-shadow: 0 1px 3px color("dark");
+	color: color("light");
+	position: sticky;
+	top: 0;
+
+	z-index: z-index("header");
+
+	&__container {}
+
+	&__row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	&__col {}
+
+	&__col-logo {
+		display: flex;
+		align-items: center;
+	}
+
+	&__col-menu-btn {
+		display: flex;
+		flex: 1;
+	}
+
+	&__col-main-menu {}
+
+	&__btn {
+		border: none;
+	}
+
+	@include max-width("lg") {
+		&__col-main-menu {
+			display: none;
+		}
+
+		&__col-menu-btn {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+		}
+
+		&__link-catalog {
+			display: none;
+		}
+
+		&__col-logo {
+			flex: 1;
+		}
+	}
+
+	@include min-width("lg") {}
+}

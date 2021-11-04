@@ -1,0 +1,59 @@
+.menu-view {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: calc(100vh - #{$height-header});
+	transform-origin: center 0;
+	transform: scaleY(0);
+	overflow-y: auto;
+
+	/* TODO: set z-index */
+
+	background-color: color("light");
+
+	@include hide(true);
+	@include transition("default");
+
+	&.active {
+		transform: scaleY(1);
+		@include hide(false);
+		@include transition("default");
+	}
+
+	&__wrapper {
+	}
+
+	&__head {
+		color: color("dark");
+		margin-bottom: .3em;
+	}
+
+	&__menu {
+	}
+
+	&__main-menu {
+
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1rem;
+
+		.main-menu__item {
+			flex: 1 1 90px;
+			min-height: 90px;
+			display: flex;
+		}
+
+		.main-menu__link {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+
+			width: 100%;
+			border: 1px solid color("dark");
+			color: color("dark");
+		}
+	}
+}
