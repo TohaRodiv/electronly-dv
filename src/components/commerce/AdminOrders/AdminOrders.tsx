@@ -22,7 +22,7 @@ export const AdminOrders: React.FC<TProps> = ({ orders }: TProps): JSX.Element =
 								{item.tel &&
 									<li className="admin-order-contact__tel">
 										<a
-											href={`tel:${item.tel.replaceAll(/[\D]+/g, "")}`}
+											href={`tel:${item.tel.replace(/[\D]+/g, "")}`}
 											className="admin-order-contact__link">
 											{item.tel}
 										</a>
