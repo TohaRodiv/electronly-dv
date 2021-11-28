@@ -1,5 +1,5 @@
-import "swiper/swiper.scss";
-import "swiper/components/navigation/navigation.scss";
+// import "swiper/swiper.scss";
+// import "swiper/components/navigation/navigation.scss";
 import "#styles/style.scss";
 import type { AppProps } from "next/dist/next-server/lib/router/router";
 import type { TMenu } from "#types/TMenu";

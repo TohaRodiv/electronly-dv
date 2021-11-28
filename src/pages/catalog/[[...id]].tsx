@@ -21,7 +21,7 @@ const Catalog: NextPage<TProps> = ({ categories, products, }: TProps) => {
 			<Section>
 				<ListCategories categories={categories} />
 			</Section>
-		
+
 			<Section>
 				<ListThumbs products={products} />
 			</Section>
@@ -37,22 +37,15 @@ export async function getServerSideProps(ctx: NextPageContext): TSProps {
 		products: null,
 	};
 
-	const categoryId = Number(ctx.query.id);
-	
-	try {
+	const categoryId = +ctx.query.id;
 
-		if (!categoryId) {
-			props.categories = await CategoryService.getMany();
-			props.products = await ProductService.getMany();
-		}
-		else if (isFinite(categoryId) && categoryId > 0) {
-			// props.categories = [await CategoryService.findById(categoryId)];
-			props.categories = await CategoryService.getMany();
-			props.products = await ProductService.findByCategoryId(categoryId);
-		}
-
-	} catch (e) {
-		console.error("Error fetch catalog!", e);
+	if (!categoryId) {
+		props.categories = (await CategoryService.getMany()).payload;
+		props.products = (await ProductService.getMany()).payload;
+	}
+	else if (isFinite(categoryId) && categoryId > 0) {
+		props.categories = (await CategoryService.getMany()).payload;
+		props.products = (await ProductService.findByCategoryId(categoryId)).payload;
 	}
 
 	return {

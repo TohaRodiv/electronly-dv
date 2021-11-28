@@ -1,9 +1,7 @@
-import { createOrderDto } from "#data-transfer-types/src/services/api/shop/dto/createOrderDto";
+import { CreateOrderDTO } from "#data-transfer-types/src/services/api/shop/dto/CreateOrderDTO";
+import { TResultFetch } from "../types";
 
-/**
- * TODO: Доработать...
- */
 export interface IOrderRepository {
-	findById(id: number): Promise<any>
-	createAndSave(order: createOrderDto): Promise<any>
+	findById(id: number): Promise<TResultFetch<any>>
+	createAndSave(order: CreateOrderDTO): Promise<TResultFetch<any>>
 }

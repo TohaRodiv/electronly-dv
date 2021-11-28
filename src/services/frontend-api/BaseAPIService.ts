@@ -1,7 +1,7 @@
+import { TResponse, TResultFetch } from "#repositories/types";
 import { RequestQueryBuilder } from "@nestjsx/crud-request";
-import { TResponse, TResultFetch, } from "../types";
 
-export abstract class BaseRepository {
+export abstract class BaseAPIService {
 	protected queryBuilder: RequestQueryBuilder;
 
 	constructor() {
@@ -31,7 +31,7 @@ export abstract class BaseRepository {
 		};
 
 		try {
-			const response = await fetch(`${process.env.API_URL}${url}`, options);
+			const response = await fetch(`/api${url}`, options);
 			result.response = response;
 			const resultJSON = await response.json();
 

@@ -4,11 +4,16 @@ import { BaseRepository } from "../BaseRepository";
 
 export class NewsRepository extends BaseRepository implements IStorageRepository {
 	public async findMany(options: TFindManyOptions): Promise<any> {
-		const {limit} = options;
+		const { limit } = options;
 
 		const params =
 			this.getQueryBuilder()
-				.setFilter({ field: "categoryId", operator: "$eq", value: 1 })
+				.setFilter(
+					[
+						{ field: "category.id", operator: "$eq", value: 1 },
+						{ field: "active", operator: "$eq", value: true },
+					]
+				)
 				.setLimit(limit || 10)
 				.query();
 
@@ -18,7 +23,12 @@ export class NewsRepository extends BaseRepository implements IStorageRepository
 	public async findById(id: number): Promise<any> {
 		const params =
 			this.getQueryBuilder()
-				.setFilter({ field: "categoryId", operator: "$eq", value: 1 })
+				.setFilter(
+					[
+						{ field: "category.id", operator: "$eq", value: 1 },
+						{ field: "active", operator: "$eq", value: true },
+					]
+				)
 				.query();
 
 		return await this.fetch(`/blog/articles/${id}?${params}`);

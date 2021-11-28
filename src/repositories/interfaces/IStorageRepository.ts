@@ -1,6 +1,6 @@
-import { TFindManyOptions } from "../types";
+import { TFindManyOptions, TResultFetch } from "../types";
 
 export interface IStorageRepository {
-	findMany(options: TFindManyOptions): Promise<any[]>;
-	findById(id: number): Promise<any>;
+	findMany(options: TFindManyOptions): Promise<TResultFetch<any[]>>;
+	findById(id: number): Promise<TResultFetch<any>>;
 }

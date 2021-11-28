@@ -30,18 +30,16 @@ const Product: NextPage<TProps> = ({ product, }: TProps): JSX.Element => {
 
 export default Product;
 
-/**
- * TODO: Сделать запрос на сервер для товара по переданному идентификатору.
- */
+
 export const getServerSideProps = async (ctx: NextPageContext): TSProps => {
-	const productId = Number(ctx.query["id"]);
+	const productId = +ctx.query["id"];
 
 	const props = {
 		product: null,
 	};
 
 	if (isFinite(productId)) {
-		props.product = await ProductService.findById(productId);
+		props.product = (await ProductService.findById(productId)).payload;
 	}
 
 	return { props };

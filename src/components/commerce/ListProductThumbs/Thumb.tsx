@@ -21,13 +21,13 @@ export const Thumb: React.FC<TProps> = ({ product, className, ...divProps }: TPr
 	/**
 	 * TODO: Доработать получение изображений товара
 	 */
-	const firestImage = product.images[0] || product.image;
+	const firstImage = product.images.length > 0 ? product.images[0].path : product.image;
 
 	return (
 		<div className={classes} {...divProps}>
 			<Link href={href} className="product-thumb__image-wrapper">
 				<img
-					src={firestImage}
+					src={firstImage}
 					alt={product.name}
 					className="product-thumb__image" />
 			</Link>

@@ -1,5 +1,6 @@
 import { IStorageRepository } from "#repositories/interfaces/IStorageRepository";
-import { CategoryRepository } from "#repositories/local/shop/CategoryRepository";
+import { CategoryRepository } from "#repositories/api/shop/CategoryRepository";
+import { TResultFetch } from "#data-transfer-types/src/repositories/types";
 
 
 export const CategoryService = new class {
@@ -9,11 +10,11 @@ export const CategoryService = new class {
 		this.repository = new CategoryRepository();
 	}
 
-	public async getMany(options: any = {}) {
+	public async getMany(options: any = {}): Promise<TResultFetch<any[]>> {
 		return await this.repository.findMany(options);
 	}
 
-	public async findById(id: number) {
+	public async findById(id: number): Promise<TResultFetch<any>> {
 		return await this.repository.findById(id);
 	}
 };

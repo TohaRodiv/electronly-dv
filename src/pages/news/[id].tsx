@@ -2,7 +2,6 @@ import Head from "next/head";
 import { Section, SectionHead, } from "#skeleton/Section";
 import { Container } from "react-grid-system";
 import { NextPage, NextPageContext } from "next";
-// import { news } from "#data/news";
 import { BlogArticle } from "#types/DTO";
 import { NewsService } from "#data-transfer-types/src/services/api/blog/NewsService";
 
@@ -41,10 +40,10 @@ export const getServerSideProps = async (ctx: NextPageContext): TSProps => {
 		news: null,
 	};
 
-	const newsId = Number(ctx.query["id"]);
+	const newsId = +ctx.query["id"];
 
 	if (isFinite (newsId)) {
-		props.news = await NewsService.findById (newsId);
+		props.news = (await NewsService.findById (newsId)).payload;
 	}
 
 	return {

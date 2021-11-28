@@ -23,7 +23,7 @@ export class ProductRepository extends BaseRepository implements IProductReposit
 	public async findByCategoryId(categoryId: number): Promise<any> {
 		const params =
 			this.getQueryBuilder()
-				.setFilter({ field: "categoryId", operator: "$eq", value: categoryId })
+				.setFilter({ field: "category.id", operator: "$eq", value: categoryId })
 				.setFilter({ field: "active", operator: "$eq", value: true })
 				.query();
 

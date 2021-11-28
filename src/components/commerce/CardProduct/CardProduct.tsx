@@ -25,7 +25,7 @@ export const CardProduct: React.FC<TPropsComponent> = ({
 			<form action="" method="POST">
 				<Row>
 					<Col sm={6}>
-						<Images images={product.images} alt={product.name} />
+						<Images images={product.images.length > 0 ? product.images : [product.image]} alt={product.name} />
 					</Col>
 
 					<Col sm={6} className="product-cart__content">

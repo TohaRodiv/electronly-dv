@@ -1,7 +1,9 @@
 import classNames from "classnames";
 
 type TProps = {
-	images: string[]
+	images: string[] | {
+		path: string
+	}
 	alt: string
 	className?: string
 }
@@ -13,7 +15,7 @@ export const Images: React.FC<TProps> = ({ images, alt, className, }: TProps): J
 			<div className={classes}>
 				{
 					images[0] && (
-						<img src={images[0]} alt={alt} loading={"lazy"} className="product-cart__image" />
+						<img src={images[0].path || images[0]} alt={alt} loading={"lazy"} className="product-cart__image" />
 					)
 				}
 			</div>

@@ -8,8 +8,8 @@ SwiperCore.use([Navigation]);
 
 type TProps = {
 	slides: Array<{
-		head: string
-		description?: string
+		title: string
+		subtitle?: string
 		image: string
 	}>
 	className?: string
@@ -17,7 +17,7 @@ type TProps = {
 
 export const TopSlider: React.FC<TProps> = ({ slides, className, ...swiperOptions }: TProps): JSX.Element => {
 
-	const classes = classNames("top-slider", className);	
+	const classes = classNames("top-slider", className);
 
 	return (
 		slides ? (
@@ -31,11 +31,11 @@ export const TopSlider: React.FC<TProps> = ({ slides, className, ...swiperOption
 						<SwiperSlide key={index} className="top-slider__slide">
 							<div className="top-slider__body">
 								{
-									slide.head && <h2 className="top-slider__head">{slide.head}</h2>
+									slide.title && <h2 className="top-slider__head">{slide.title}</h2>
 								}
 								
 								{
-									slide.description && <div className="top-slider__description">{slide.description}</div>
+									slide.subtitle && <div className="top-slider__description">{slide.subtitle}</div>
 								}
 
 								<div className="top-slider__btn-group">
@@ -43,7 +43,7 @@ export const TopSlider: React.FC<TProps> = ({ slides, className, ...swiperOption
 									<Link href="/catalog" className="btn btn--action top-slider__link">В каталог</Link>
 								</div>
 							</div>
-							<img src={slide.image} alt="{slide.head}" className="top-slider__image" />
+							<img src={slide.image} alt="{slide.title}" className="top-slider__image" />
 						</SwiperSlide>
 					))
 				}

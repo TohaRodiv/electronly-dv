@@ -1,1 +1,0 @@
-export { AdminOrders } from "./AdminOrders";

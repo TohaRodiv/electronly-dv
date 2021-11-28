@@ -2,13 +2,13 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { Section, SectionHead, } from "#skeleton/Section";
 import { Container } from "react-grid-system";
-import { TopSlider } from "#commerce/TopSlider";
 import React from "react";
 import { ListThumbs } from "#commerce/ListProductThumbs";
 import { NewsList } from "#commerce/News";
 import { NewsService } from "../services/api/blog/NewsService";
 import { ProductService } from "../services/api/shop/ProductService";
 import { BannerService } from "../services/api/promo/BannerService";
+import { TopBanner } from "../components/commerce/TopBanner";
 
 type TProps = {
 	news: any,
@@ -20,7 +20,7 @@ type TSprops = Promise<{
 	props: TProps
 }>
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 const Home: NextPage<TProps> = ({ news, products, banners, }: TProps) => {
 
 	return (
@@ -29,7 +29,7 @@ const Home: NextPage<TProps> = ({ news, products, banners, }: TProps) => {
 				<title>Electronly - магазин цифровой техники по низким ценам</title>
 			</Head>
 			{banners && banners.length > 0 &&
-				<TopSlider slides={banners} />
+				<TopBanner banner={banners[0]} />
 			}
 
 			{products && products.length > 0 &&
@@ -64,14 +64,9 @@ export async function getServerSideProps(): TSprops {
 		banners: null,
 	};
 
-	try {
-		props.news = await NewsService.getMany();
-		props.products = await ProductService.getMany();
-		props.banners = await BannerService.getMany();
-	}
-	catch (e) {
-		console.error(e);
-	}
+	props.news = (await NewsService.getMany()).payload;
+	props.products = (await ProductService.getMany()).payload;
+	props.banners = (await BannerService.getMany()).payload;
 
 	return {
 		props,

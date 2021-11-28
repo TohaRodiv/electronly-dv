@@ -37,13 +37,8 @@ export const getServerSideProps = async (_ctx: NextPageContext): TSProps => {
 	const props = {
 		news: null,
 	};
-
-	try {
-		props.news = await NewsService.getMany();
-	}
-	catch(e) {
-		console.log(e);
-	}
+	
+	props.news = (await NewsService.getMany()).payload;
 
 	return {
 		props,

@@ -3,6 +3,7 @@ import React, { ReactNode } from "react";
 import { TPropsComponent } from "./TPropsComponent";
 import { HTMLElementAttributes } from "#types/HTMLElementAttributes";
 import { categories } from "#data-transfer-types/src/data/categories";
+import { ShopCategoryService } from "#data-transfer-types/src/services/frontend-api/ShopCategoryService";
 
 type TProps = {
 	menu: {
@@ -13,15 +14,17 @@ type TProps = {
 
 type TState = {
 	isActiveMenu: boolean
+	catalogMenu: typeof categories
 }
 
 export const Container = (Component: React.ComponentType <TPropsComponent>): React.ComponentType <TProps> =>
 	class HeaderContainer extends React.Component<TProps, TState> {
 		state: TState = {
 			isActiveMenu: false,
+			catalogMenu: null,
 		}
 
-		componentDidMount(): void {
+		async componentDidMount(): Promise<void> {
 			const links = document.querySelectorAll(".menu-view a");
 
 			links.forEach(link => {
@@ -29,6 +32,12 @@ export const Container = (Component: React.ComponentType <TPropsComponent>): Rea
 					this.setState({ isActiveMenu: false });
 				});
 			});
+
+			const categories = (await ShopCategoryService.getMany()).payload.filter(category => category.active == true);
+			this.setState(prevState => ({
+				...prevState,
+				catalogMenu: categories,
+			}));
 		}
 
 		handleToggleMenu = () => {
@@ -38,6 +47,7 @@ export const Container = (Component: React.ComponentType <TPropsComponent>): Rea
 		render(): ReactNode {
 
 			const { menu, ...extraProps } = this.props;
+			menu.catalog = this.state.catalogMenu || menu.catalog;
 			const { isActiveMenu, } = this.state;
 
 			return (

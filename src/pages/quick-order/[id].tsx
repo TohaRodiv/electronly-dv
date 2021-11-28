@@ -1,41 +1,58 @@
-import {NextPage, NextPageContext} from "next";
+import { NextPage, NextPageContext } from "next";
 import { ProductDTO } from "#types/DTO";
-import {Section} from "#skeleton/Section";
-import {Container} from "react-grid-system";
-import {Button} from "#ui/Button";
+import { Section } from "#skeleton/Section";
+import { Container } from "react-grid-system";
+import { Button } from "#ui/Button";
 import { ProductService } from "#data-transfer-types/src/services/api/shop/ProductService";
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useState } from "react";
+import { formToJSON } from "#data-transfer-types/src/libs/formToJSON";
+import { OrderService } from "#data-transfer-types/src/services/frontend-api/OrderService";
+import type { CreateOrderDTO } from "#data-transfer-types/src/services/api/shop/dto/CreateOrderDTO";
 
 type TProps = {
 	product: ProductDTO | null;
 }
 
-type TSProps = Promise <{
+type TSProps = Promise<{
 	props: TProps;
 }>
 
-const QuickOrder: NextPage <TProps> = ({ product, }: TProps): JSX.Element => {
+const QuickOrder: NextPage<TProps> = ({ product, }: TProps): JSX.Element => {
+
+	const [state, setState] = useState({
+		isResponseReceived: false,
+		message: null,
+	});
 
 	const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
-		/**
-		 * TODO: Доработать заказ товара
-		 */
 		e.preventDefault();
-		const target = e.currentTarget;
-		const data = new FormData(target);
+		const form = e.currentTarget;
+		const dto = formToJSON(form.elements) as CreateOrderDTO;
 
-		await fetch("/api/order", {
-			body: data,
-			method: "POST",
-		});
+		const { error } = await OrderService.createAndSave(dto);
+
+		if (error) {
+			setState({
+				isResponseReceived: true,
+				message: error.message,
+			});
+		} else {
+			setState({
+				isResponseReceived: true,
+				message: "Ваша заявка успешно отправленна!",
+			});
+		}
 	};
 
 	return (
 		<Section>
 			<Container>
+				{
+					state.isResponseReceived && <p>{state.message}</p>
+				}
+
 				<form action="" method="POST" className="form" onSubmit={handleSubmit}>
-					<input type="hidden" name="productId" value={product.id} />
-					<input type="hidden" name="productName" value={product.name} />
+					<input type="hidden" name="status" value={1} />
 					<h2 className="form__head">Оформление быстрого заказа</h2>
 					<div className="form__row">
 						<div className="form__col">
@@ -61,8 +78,10 @@ const QuickOrder: NextPage <TProps> = ({ product, }: TProps): JSX.Element => {
 
 						<div className="form__col">
 							<label className="form__label">
-								<span className="form__name">Название товара</span>
-								<input type="text" className="form__field" disabled={true} value={product.name} />
+								<span className="form__name">Товары</span>
+								<select multiple={true} disabled={true} name="products" defaultValue={[product.id]}>
+									<option value={product.id}>{product.name}</option>
+								</select>
 							</label>
 						</div>
 
@@ -78,20 +97,21 @@ const QuickOrder: NextPage <TProps> = ({ product, }: TProps): JSX.Element => {
 						</div>
 					</div>
 				</form>
+
 			</Container>
 		</Section>
 	);
 };
 
-export async function getServerSideProps (ctx: NextPageContext): TSProps {
-	const productId = Number(ctx.query["id"]);
+export async function getServerSideProps(ctx: NextPageContext): TSProps {
+	const productId = +ctx.query["id"];
 
 	const props = {
 		product: null,
 	};
 
 	if (isFinite(productId)) {
-		props.product = await ProductService.findById(productId);
+		props.product = (await ProductService.findById(productId)).payload;
 	}
 
 	return { props };
