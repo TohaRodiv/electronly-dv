@@ -12,6 +12,8 @@ RUN npm install
 # Копирование файлов проекта
 COPY . .
 
+EXPOSE 3000
+
 RUN npm run build
 
 # Запуск проекта
