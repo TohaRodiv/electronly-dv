@@ -1,9 +1,9 @@
 import { IStorageRepository } from "../../interfaces/IStorageRepository";
-import { TFindManyOptions } from "../../types";
+import { TFindManyOptions, TResultFetch } from "../../types";
 import { BaseRepository } from "../BaseRepository";
 
 export class NewsRepository extends BaseRepository implements IStorageRepository {
-	public async findMany(options: TFindManyOptions): Promise<any> {
+	public async findMany(options: TFindManyOptions): Promise<TResultFetch<any[]>> {
 		const { limit } = options;
 
 		const params =
@@ -20,7 +20,7 @@ export class NewsRepository extends BaseRepository implements IStorageRepository
 		return await this.fetch(`/blog/articles/?${params}`);
 	}
 
-	public async findById(id: number): Promise<any> {
+	public async findById(id: number): Promise<TResultFetch<any>> {
 		const params =
 			this.getQueryBuilder()
 				.setFilter(
