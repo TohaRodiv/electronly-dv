@@ -2,7 +2,6 @@ FROM node:16.13.0-alpine3.11
 
 # Папка приложения
 ARG APP_DIR=/usr/app
-# RUN mkdir -p ${APP_DIR}
 WORKDIR ${APP_DIR}
 
 # Установка зависимостей
@@ -12,9 +11,8 @@ RUN npm install
 # Копирование файлов проекта
 COPY . .
 
-EXPOSE 3000
-
 RUN npm run build
+RUN npx browserslist@latest --update-db
 
 # Запуск проекта
 CMD npm run start
