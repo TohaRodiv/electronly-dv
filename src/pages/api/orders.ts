@@ -6,8 +6,6 @@ export default async function orders(req: NextApiRequest, res: NextApiResponse):
 	if (req.method === "POST") {
 		const data = req.body;
 		const { payload, error } = await OrderService.createAndSave(data);
-
-		console.log("Data from api:", data);
 		
 		if (error) {
 			res.status(error.statusCode || 500).json(error);
