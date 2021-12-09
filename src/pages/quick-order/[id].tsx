@@ -8,6 +8,7 @@ import { SyntheticEvent, useState } from "react";
 import { formToJSON } from "#data-transfer-types/src/libs/formToJSON";
 import { OrderService } from "#data-transfer-types/src/services/frontend-api/OrderService";
 import type { CreateOrderDTO } from "#data-transfer-types/src/services/api/shop/dto/CreateOrderDTO";
+import InputMask from "react-input-mask";
 
 type TProps = {
 	product: ProductDTO | null;
@@ -65,7 +66,7 @@ const QuickOrder: NextPage<TProps> = ({ product, }: TProps): JSX.Element => {
 						<div className="form__col">
 							<label className="form__label">
 								<span className="form__name">Телефон</span>
-								<input type="text" className="form__field" required={true} name="tel" />
+								<InputMask mask="+7 (999) 999-99-99" className="form__field" required={true} name="tel" type="text" />
 							</label>
 						</div>
 
