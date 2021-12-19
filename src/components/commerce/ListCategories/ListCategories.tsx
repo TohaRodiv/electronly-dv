@@ -13,7 +13,7 @@ export const ListCategories: React.FC<TProps> = ({ categories, className, ...ulP
 		{...ulProps} >
 
 		{
-			categories.map(category => {
+			categories && categories.map(category => {
 				if (!category) return null;
 				
 				return (

@@ -33,7 +33,8 @@ export const Container = (Component: React.ComponentType <TPropsComponent>): Rea
 				});
 			});
 
-			const categories = (await ShopCategoryService.getMany()).payload.filter(category => category.active == true);
+			const categoriesPayload = await ShopCategoryService.getMany();
+			const categories = Array.isArray(categoriesPayload.payload) ? categoriesPayload.payload.filter(category => category.active == true) : [];
 			this.setState(prevState => ({
 				...prevState,
 				catalogMenu: categories,

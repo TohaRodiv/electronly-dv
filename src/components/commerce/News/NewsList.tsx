@@ -15,7 +15,7 @@ export const NewsList: React.FC<TProps> = ({ news, className, ...props }: TProps
 	return (
 		<ul className={classNames("news-list", className)} {...props}>
 			{
-				news.map(item => (
+				news && news.map(item => (
 					<li className="news-list__item" key={item.id}>
 						<News news={item} className="news-list__news" />
 					</li>

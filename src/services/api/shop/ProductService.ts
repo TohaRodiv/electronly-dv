@@ -12,7 +12,7 @@ export const ProductService = new class {
 	public async getMany(options: any = {}): Promise<TResultFetch<any[]>> {
 		const result = await this.repository.findMany(options);
 		
-		result.payload = this.getFormattedProduct(result.payload);
+		result.payload = result.payload && this.getFormattedProduct(result.payload);
 
 		return result;
 	}
@@ -20,7 +20,7 @@ export const ProductService = new class {
 	public async findById(id: number): Promise<TResultFetch<any>> {
 		const result = await this.repository.findById(id);
 
-		result.payload = this.getFormattedProduct([result.payload])[0];
+		result.payload = result.payload &&  this.getFormattedProduct([result.payload])[0];
 
 		return result;
 	}
@@ -28,17 +28,20 @@ export const ProductService = new class {
 	public async findByCategoryId(categoryId: number): Promise<TResultFetch<any[]>> {
 		const result = await this.repository.findByCategoryId(categoryId);
 
-		result.payload = this.getFormattedProduct(result.payload);
+		result.payload = result.payload &&  this.getFormattedProduct(result.payload);
 
 		return result;
 	}
 
 	private getFormattedProduct (payload: any): any {
+		if (!Array.isArray(payload)) {
+			return null;
+		}
 		return payload.map((product: any) => ({
 			...product,
 			images: product.images.map((image: any) => ({
 				...image,
-				path: `${process.env.API_URL_FOR_FRONTEND}/${image.path}`,
+				path: `${process.env.API_URL}/${image.path}`,
 			}))
 		}));
 	}

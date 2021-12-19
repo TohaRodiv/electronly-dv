@@ -15,7 +15,7 @@ export const ListThumbs: React.FC<TProps> = ({ products, className, ...ulProps }
 	return (
 		<ul className={classes} {...ulProps}>
 			{
-				products.map((product, index) => (
+				products && products.map((product, index) => (
 					<li key={index} className="list-thumbs__item">
 						<Thumb product={product} className="list-thumbs__thumb" />
 					</li>

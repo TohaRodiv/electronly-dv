@@ -1,3 +1,4 @@
+import { AuthService } from "#data-transfer-types/src/services/api/auth/AuthService";
 import { RequestQueryBuilder } from "@nestjsx/crud-request";
 import { TResponse, TResultFetch, } from "../types";
 
@@ -23,7 +24,7 @@ export abstract class BaseRepository {
 		});
 	}
 
-	protected async fetch(url: RequestInfo, options?: RequestInit): Promise<TResultFetch <any | any[]> & TResponse> {
+	protected async fetch(url: RequestInfo, options?: RequestInit): Promise<TResultFetch<any | any[]> & TResponse> {
 		const result = {
 			response: null,
 			payload: null,
@@ -31,20 +32,36 @@ export abstract class BaseRepository {
 		};
 
 		try {
-			const response = await fetch(`${process.env.API_URL}${url}`, options);
+			// eslint-disable-next-line prefer-const
+			let { ...optionFields } = options;
+			const response = await fetch(`${process.env.API_URL}${url}`, {
+				...optionFields,
+				headers: new Headers({
+					// ...headers,
+					"Authorization": `Bearer ${await AuthService.getAccessToken()}`
+				}),
+			});
+
 			result.response = response;
 			const resultJSON = await response.json();
 
-			if ([200, 201,].includes(response.status) === false) {
+			if (!response.ok) {
+
+				if (response.status == 401) {
+					await AuthService.authorize();
+					await this.fetch(url, options);
+				}
+
 				result.error = resultJSON;
 			} else {
 				result.payload = resultJSON;
 			}
 
 		} catch (error) {
+			console.error(error);
 			result.error = error;
 		}
-
+		
 		return result;
 	}
 
